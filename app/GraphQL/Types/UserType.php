@@ -4,6 +4,7 @@ namespace App\GraphQL\Types;
 
 use App\Models\User;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class UserType extends GraphQLType
@@ -24,6 +25,9 @@ class UserType extends GraphQLType
             'name' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Name of user'
+            ],
+            'domains' => [
+                'type' => Type::listOf(GraphQL::type('Domain'))
             ]
         ];
     }

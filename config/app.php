@@ -210,7 +210,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'EjabberdConfig' => App\Support\EjabberdConfigFacade::class
+        'EjabberdConfig' => App\Support\EjabberdConfigFacade::class,
+        'EJabberdClient' => App\Support\EjabberdClientFacade::class
     ])->toArray(),
 
 ];

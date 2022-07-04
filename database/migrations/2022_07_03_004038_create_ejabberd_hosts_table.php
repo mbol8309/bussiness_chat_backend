@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ejabberd_hosts', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ejabberd_hosts');
+        Schema::dropIfExists('domains');
     }
 };

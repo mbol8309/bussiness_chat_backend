@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EjabberdHostsController extends Controller
+class DomainController extends Controller
 {
     //
 }

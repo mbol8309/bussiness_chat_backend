@@ -85,7 +85,8 @@ return [
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
-                'User' => App\GraphQL\Types\UserType::class
+                'User' => App\GraphQL\Types\UserType::class,
+                'Domain' => App\GraphQL\Types\DomainType::class
             ],
 
             // Laravel HTTP middleware

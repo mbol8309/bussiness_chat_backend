@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use App\Class\EjabberdConfig\EjabberdConfig;
+use App\Class\Ejabberd\EjabberdClient;
+use App\Class\Ejabberd\EjabberdConfig;
+use App\Models\Domain;
+use App\Observers\DomainObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('EjabberdConfig', function ($app){
             return new EjabberdConfig;
         });
+        $this->app->bind('EjabberdClient', function ($app){
+            return new EjabberdClient;
+        });
     }
 
     /**
@@ -26,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Domain::observe(DomainObserver::class);
     }
 }
