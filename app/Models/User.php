@@ -46,4 +46,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Domain::class,'user_id','id');
     }
+
+    public function gettokenAttribute(){
+        return $this->currentAccessToken();
+    }
 }

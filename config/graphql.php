@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 return [
     'route' => [
@@ -73,20 +73,18 @@ return [
     //  ]
     //
     'schemas' => [
-        'default' => [
+        'login' => [
             'query' => [
                 // ExampleQuery::class,
-                'user' => App\GraphQL\Queries\User\UserQuery::class,
-                'users' => App\GraphQL\Queries\User\UsersQuery::class
+                // 'user' => App\GraphQL\Queries\User\UserQuery::class,
+                // 'users' => App\GraphQL\Queries\User\UsersQuery::class
             ],
             'mutation' => [
-                // ExampleMutation::class,
+                'login' => App\GraphQL\Mutations\UserLogin::class
             ],
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
-                'User' => App\GraphQL\Types\UserType::class,
-                'Domain' => App\GraphQL\Types\DomainType::class
             ],
 
             // Laravel HTTP middleware
@@ -98,6 +96,54 @@ return [
             // An array of middlewares, overrides the global ones
             'execution_middleware' => null,
         ],
+        'default' => [
+            'query' => [
+                // ExampleQuery::class,
+                'user' => App\GraphQL\Queries\User\UserQuery::class,
+                'users' => App\GraphQL\Queries\User\UsersQuery::class
+            ],
+            'mutation' => [
+                // 'login' => App\GraphQL\Mutations\UserLogin::class
+                'createDomainToken' => App\GraphQL\Mutations\CreateDomainToken::class
+            ],
+            // The types only available in this schema
+            'types' => [
+                // ExampleType::class,
+            ],
+
+            // Laravel HTTP middleware
+            'middleware' => ['auth:sanctum','abilities:authenticate'],
+
+            // Which HTTP methods to support; must be given in UPPERCASE!
+            'method' => ['GET', 'POST'],
+
+            // An array of middlewares, overrides the global ones
+            'execution_middleware' => null,
+        ],
+        'domain' => [
+            'query' => [
+                // ExampleQuery::class,
+                // 'user' => App\GraphQL\Queries\User\UserQuery::class,
+                // 'users' => App\GraphQL\Queries\User\UsersQuery::class
+            ],
+            'mutation' => [
+                // 'login' => App\GraphQL\Mutations\UserLogin::class
+                // 'createDomainToken' => App\GraphQL\Mutations\CreateDomainToken::class
+            ],
+            // The types only available in this schema
+            'types' => [
+                // ExampleType::class,
+            ],
+
+            // Laravel HTTP middleware
+            'middleware' => ['auth:sanctum','abilities:domain_token'],
+
+            // Which HTTP methods to support; must be given in UPPERCASE!
+            'method' => ['GET', 'POST'],
+
+            // An array of middlewares, overrides the global ones
+            'execution_middleware' => null,
+        ]
     ],
 
     // The global types available to all schemas.
@@ -113,6 +159,8 @@ return [
         // ExampleType::class,
         // ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
+        'User' => App\GraphQL\Types\UserType::class,
+        'Domain' => App\GraphQL\Types\DomainType::class
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

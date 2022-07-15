@@ -16,6 +16,8 @@ class UserQuery extends Query
         'name' => 'user',
     ];
 
+    // protected $middleware = ['abilities:authenticate'];
+
     public function authorize($root, array $args, $ctx, ResolveInfo $resolveInfo = null, Closure $getSelectFields = null): bool
     {
         return true;
@@ -47,7 +49,7 @@ class UserQuery extends Query
         ];
     }
 
-    public function resolve($root, $args, ?SelectFields $fields)
+    public function resolve($root, $args, $authenticated, ?SelectFields $fields)
     {
         return User::findOrFail($args['id']);
     }

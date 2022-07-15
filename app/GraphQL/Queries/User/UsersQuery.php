@@ -33,7 +33,7 @@ class UsersQuery extends Query
         ];
     }
 
-    public function resolve($root, $args, ?SelectFields $fields)
+    public function resolve($root, $args, $authenticated, ?SelectFields $fields)
     {
         return User::all();
     }

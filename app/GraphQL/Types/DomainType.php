@@ -33,7 +33,13 @@ class DomainType extends GraphQLType
             ],
             'user' => [
                 'type' => Type::nonNull(GraphQL::type('User'))
-                ]
+            ],
+            'token' => [
+                'type' => Type::string(),
+                // 'privacy'       => function(array $args, $ctx): bool {
+                //     return isset($args['id']) && $args['id'] == Auth::id();
+                // }
+            ],
         ];
     }
 }
