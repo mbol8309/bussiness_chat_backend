@@ -32,6 +32,9 @@ class DomainSchema extends Schema
             ID::make(),
             Str::make('name'),
             Str::make('url'),
+            Str::make('token')->hidden(static function($request){
+                return $request->route()->action['as'] !== 'v1.domains.token';
+            }),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

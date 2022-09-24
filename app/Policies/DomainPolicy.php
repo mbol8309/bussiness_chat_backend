@@ -91,4 +91,9 @@ class DomainPolicy
     {
         return $user->hasRole('super-admin');
     }
+
+    public function createToken(User $user, Domain $domain)
+    {
+        return $user->hasRole('super-admin');
+    }
 }

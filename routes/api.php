@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\DomainController as V1DomainController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\UserController;
 use App\Http\Resources\UserResource;
@@ -50,7 +51,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     ->prefix('v1')
     ->resources(function ($server) {
         $server->resource('users', JsonApiController::class);
-        $server->resource('domains', JsonApiController::class);
+        $server->resource('domains', V1DomainController::class)->actions(function($actions){
+            $actions->withId()->post('token')->name('token');
+        });
     });
     
 
