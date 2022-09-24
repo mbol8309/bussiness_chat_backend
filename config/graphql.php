@@ -13,7 +13,7 @@ return [
 
         // Any middleware for the graphql route group
         // This middleware will apply to all schemas
-        'middleware' => [],
+        'middleware' => ['json.response'],
 
         // Additional route group attributes
         //
@@ -73,11 +73,31 @@ return [
     //  ]
     //
     'schemas' => [
-        'login' => [
+        'user' => [
             'query' => [
-                // ExampleQuery::class,
-                // 'user' => App\GraphQL\Queries\User\UserQuery::class,
-                // 'users' => App\GraphQL\Queries\User\UsersQuery::class
+                'user' => App\GraphQL\Queries\User\UserQuery::class,
+                'users' => App\GraphQL\Queries\User\UsersQuery::class
+            ],
+            'mutation' => [
+                'createDomainToken' => App\GraphQL\Mutations\CreateDomainToken::class
+                
+            ],
+            // The types only available in this schema
+            'types' => [
+                // ExampleType::class,
+            ],
+
+            // Laravel HTTP middleware
+            'middleware' => ['auth:sanctum','abilities:authenticate'],
+
+            // Which HTTP methods to support; must be given in UPPERCASE!
+            'method' => ['GET', 'POST'],
+
+            // An array of middlewares, overrides the global ones
+            'execution_middleware' => null,
+        ],
+        'default' => [
+            'query' => [
             ],
             'mutation' => [
                 'login' => App\GraphQL\Mutations\UserLogin::class
@@ -89,30 +109,6 @@ return [
 
             // Laravel HTTP middleware
             'middleware' => null,
-
-            // Which HTTP methods to support; must be given in UPPERCASE!
-            'method' => ['GET', 'POST'],
-
-            // An array of middlewares, overrides the global ones
-            'execution_middleware' => null,
-        ],
-        'default' => [
-            'query' => [
-                // ExampleQuery::class,
-                'user' => App\GraphQL\Queries\User\UserQuery::class,
-                'users' => App\GraphQL\Queries\User\UsersQuery::class
-            ],
-            'mutation' => [
-                // 'login' => App\GraphQL\Mutations\UserLogin::class
-                'createDomainToken' => App\GraphQL\Mutations\CreateDomainToken::class
-            ],
-            // The types only available in this schema
-            'types' => [
-                // ExampleType::class,
-            ],
-
-            // Laravel HTTP middleware
-            'middleware' => ['auth:sanctum','abilities:authenticate'],
 
             // Which HTTP methods to support; must be given in UPPERCASE!
             'method' => ['GET', 'POST'],

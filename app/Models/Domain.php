@@ -11,6 +11,7 @@ class Domain extends Model
 {
     use HasFactory, HasApiTokens;
     use HasSettingsTable;
+    protected $fillable = ['name','url'];
 
     public function user(){
         return $this->belongsTo(User::class,'user_id');

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AddContentLenghtHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,6 +22,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Fruitcake\Cors\HandleCors::class,
     ];
 
     /**
@@ -64,6 +66,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
-        'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class
+        'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
+        //'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
     ];
 }
